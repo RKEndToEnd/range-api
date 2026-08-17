@@ -3,11 +3,9 @@
 use App\Http\Controllers\Api\OrganizationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('v1')->group(function () {
+    Route::apiResource(
+        'organizations',
+        OrganizationController::class
+    );
 });
-
-Route::apiResource(
-    'organizations',
-    OrganizationController::class
-);
