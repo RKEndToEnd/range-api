@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Database\Factories\OrganizationFactory;
@@ -24,9 +26,17 @@ class Organization extends Model
     /**
      * @return HasMany
      */
-    public function clubs():HasMany
+    public function clubs(): HasMany
     {
         return $this->hasMany(Club::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function associations(): HasMany
+    {
+        return $this->hasMany(Association::class);
     }
 
 //todo: uncomment when add classes below
