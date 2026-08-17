@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -12,7 +14,7 @@ class UpdateOrganizationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,10 +22,27 @@ class UpdateOrganizationRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+   public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'sometimes',
+                'string',
+                'max:255',
+            ],
+
+            'slug' => [
+                'sometimes',
+                'string',
+                'max:255',
+                'unique:organizations,slug,' . $this->organization->id,
+            ],
+
+            'tax_id' => [
+                'nullable',
+                'string',
+                'max:50',
+            ],
         ];
     }
 }

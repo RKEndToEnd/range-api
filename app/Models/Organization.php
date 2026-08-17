@@ -21,6 +21,14 @@ class Organization extends Model
         'status',
     ];
 
+    /**
+     * @return HasMany
+     */
+    public function clubs():HasMany
+    {
+        return $this->hasMany(Club::class);
+    }
+
 //todo: uncomment when add classes below
 
 //    public function units(): HasMany
